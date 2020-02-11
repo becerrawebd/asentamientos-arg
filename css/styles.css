@@ -1,0 +1,9 @@
+.map {
+    height: 70vh;
+    background-color: aliceblue;
+}
+
+html{
+    min-height: 100%;
+}
+
