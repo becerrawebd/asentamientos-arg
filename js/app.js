@@ -27,13 +27,20 @@ function solicitarAsentamientosDe(idProvincia) {
         .catch(error => alert(error))
 }
 
-function cargarMapa(data){
-    data.asentamientos.forEach(asentamiento => {
-        let latitud = asentamiento.centroide.lat
-        let longitud = asentamiento.centroide.lon
-        L.marker([`${latitud}`, `${longitud}`]).addTo(map.mapa)
-            .bindPopup(`${asentamiento.nombre}`)
-    });
-    console.log(data.total)
+function cargarMapa(data) {
+    if (data.total != 0) {
+        let lat = data.asentamientos[0].centroide.lat
+        let lon = data.asentamientos[0].centroide.lon
+        map.mapa.setView([lat, lon], 6)
+        data.asentamientos.forEach(asentamiento => {
+            let latitud = asentamiento.centroide.lat
+            let longitud = asentamiento.centroide.lon
+            L.marker([`${latitud}`, `${longitud}`]).addTo(map.mapa)
+                .bindPopup(`${asentamiento.nombre}`)
+        });
+    } else {
+        alert('No hay datos de la provincia seleccionada')
+    }
+    
 }
 
