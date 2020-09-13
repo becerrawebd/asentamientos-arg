@@ -8,11 +8,6 @@ Consumo de API del Servicio de Normalización de Datos Geográficos de Argentina
 
 - HTML, CSS Y Javascript
 
-### Creditos
-
-- [Frontend Mentor](https://www.frontendmentor.io/)
-- [REST Countries](https://restcountries.eu/)
-
 ### Contacto
 
 - [Email](mailto:becerradiego94@gmail.com)
