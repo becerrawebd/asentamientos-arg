@@ -2,7 +2,6 @@ const map = new Mapa();
 const formulario = document.querySelector('#form');
 const divMapa = document.querySelector('#map');
 
-
 eventListeners();
 
 function eventListeners() {
@@ -27,20 +26,26 @@ function solicitarAsentamientosDe(idProvincia) {
         .catch(error => alert(error))
 }
 
+let markerList = []
+
 function cargarMapa(data) {
+    clearMarkerList()
     if (data.total != 0) {
-        let lat = data.asentamientos[0].centroide.lat
-        let lon = data.asentamientos[0].centroide.lon
+        let { lat, lon } = data.asentamientos[0].centroide
         map.mapa.setView([lat, lon], 6)
         data.asentamientos.forEach(asentamiento => {
-            let latitud = asentamiento.centroide.lat
-            let longitud = asentamiento.centroide.lon
-            L.marker([`${latitud}`, `${longitud}`]).addTo(map.mapa)
+            let { lat, lon } = asentamiento.centroide
+            let marker = L.marker([lat,lon]).addTo(map.mapa)
                 .bindPopup(`${asentamiento.nombre}`)
+            markerList.push(marker)
         });
     } else {
         alert('No hay datos de la provincia seleccionada')
-    }
-    
+    }    
+}
+
+function clearMarkerList(){
+    markerList.forEach(marker => marker.remove())
+    markerList = []
 }
 
